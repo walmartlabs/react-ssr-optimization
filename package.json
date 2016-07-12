@@ -1,0 +1,44 @@
+{
+  "name": "electrode-react-ssr-optimization",
+  "version": "0.0.5",
+  "description": "React server-side rendering optimization with component memoization and templatization",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "istanbul test _mocha -- -R spec --recursive test/spec",
+    "test-cov": "istanbul cover _mocha -- -R spec --recursive test/spec",
+    "lint": "npm run lint-lib && npm run lint-test",
+    "lint-lib": "eslint -c .eslintrc-node lib --color",
+    "lint-test": "eslint -c .eslintrc-test test --color",
+    "check": "npm run lint && npm run test-cov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:walmartlabs/electrode-react-ssr-optimization.git"
+  },
+  "keywords": [
+    "react",
+    "server-side",
+    "optimization",
+    "memoization",
+    "templatization",
+    "cache",
+    "caching"
+  ],
+  "author": "Naga Malepati, Maxime Najim, Seth Benjamin",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "react": "^0.14.8",
+    "lodash": "^4.12.0",
+    "lru-cache": "^4.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "chai": "^3.5.0",
+    "eslint": "^1.10.3",
+    "eslint-config-defaults": "^8.0.1",
+    "intercept-stdout": "^0.1.2",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5",
+    "react-dom": "^0.14.8"
+  }
+}

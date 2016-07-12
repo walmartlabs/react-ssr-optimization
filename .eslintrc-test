@@ -1,0 +1,34 @@
+---
+extends:
+  - "eslint-config-defaults/configurations/walmart/es6-node"
+  - "eslint-config-defaults/configurations/walmart/es6-test"
+
+globals:
+  expect: false
+  sandbox: false
+  sinon: false
+
+rules:
+  "no-invalid-this": 0
+  "no-unused-expressions": 0 # for `chai.expect`
+  "max-len": [2, 150, 2, {ignorePattern: "^\\s*(?:it|describe)\\(.*"}]
+  "max-statements": 0
+  "max-nested-callbacks": 0
+  "prefer-arrow-callback": 0
+  "func-style":
+    - 0
+    - declaration
+  "object-shorthand":
+    - 0
+  "no-magic-numbers":
+    - 0
+  "no-console":
+    - 0
+
+env:
+  mocha: true
+
+# Turning off modules so that we can use `"use strict";` in tests for things
+# like scoped `let`, etc.
+"ecmaFeatures":
+  "modules": false
