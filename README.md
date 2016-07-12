@@ -13,7 +13,7 @@ We also wanted the ability to memoize any pure component, not just those that im
 
 
 ## How we build it
-After peeling through the React codebase we discovered React’s mountComponent function. This is where the HTML markup is generated for a component. We knew that if we could intercept React's instantiateReactComponent module by using a require()` hook we could avoid the need to fork React and inject our optimization. We keep a Least-Recently-Used (LRU) cache that stores the markup of rendered components (replacing the data-reactid appropriately).  
+After peeling through the React codebase we discovered React’s mountComponent function. This is where the HTML markup is generated for a component. We knew that if we could intercept React's instantiateReactComponent module by using a `require()` hook we could avoid the need to fork React and inject our optimization. We keep a Least-Recently-Used (LRU) cache that stores the markup of rendered components (replacing the data-reactid appropriately).  
 
 We also implemented an enhancement that will templatize the cached rendered markup to allow for more dynamic props. Dynamic props are replaced with template delimiters (i.e. ${ prop_name }) during the react component rendering cycle.  The template is them compiled, cached, executed and the markup is handed back to React. For subsequent requests the component's render(..) call is short-circuited with an execution of the cached compiled template. 
 
@@ -132,7 +132,7 @@ For the given component name, the cache key attributes are used to generate a ca
 
 ### How you configure it
 
-Here are a set of option that can be passed to the electrode-react-ssr-optimization` library:
+Here are a set of option that can be passed to the `electrode-react-ssr-optimization` library:
 
 - `components`: A _required_ map of components that will be cached and the corresponding function to generate its cache key.  
     - `key`: a _required_ string name identifying the component.  This can be either the name of the component when it extends `React.Component` or the `displayName` variable.
