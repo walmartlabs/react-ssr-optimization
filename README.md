@@ -2,7 +2,7 @@
 
 This React Server-side optimization library is a configurable ReactJS extension for memoizing react component markup on the server. It also supports component templatization to further caching of rendered markup with more dynamic data.  This server-side module intercepts React's instantiateReactComponent module by using a `require()` hook and avoids forking React. 
 
-## Why we build it
+## Why we built it
 React is a best-of-breed UI component framework allowing us to build higher level components that can be shared and reused across pages and apps. React's Virtual DOM offers an excellent development experience, freeing us up from having to manage subtle DOM changes. Most importantly, React offers us a great out-of-the-box isomorphic/universal JavaScript solution. React's `renderToString(..)` can fully render the HTML markup of a page to a string on the server. This is especially important for initial page load performance (particularly for mobile users with low bandwidth) and search engine indexing and ranking — both for SEO (search engine optimization) and SEM (search engine marketing).
 
 However, it turns out that React’s server-side rendering can become a performance bottleneck for pages requiring many virtual DOM nodes. On large pages, `ReactDOMServer.renderToString(..)` can monopolize the CPU, block node’s event-loop and starve out incoming requests to the server. That’s because for every page request, the entire page needs to be rendered, even fine-grained components — which given the same props, always return the same markup. CPU time is wasted in unnecessarily re-rendering the same components for every page request.  Similar to pure functions in functional programing a pure component will always return the same HTML markup given the same props. Which means it should be possible to memoize (or cache) the rendered results to speed up rendering significantly after the first response. 
@@ -11,8 +11,12 @@ We also wanted the ability to memoize any pure component, not just those that im
 
 <img width="800" align="center" src="/images/react-renderToString-cpu-profile.png">
 
+### YouTube: Hastening React SSR with Component Memoization and Templatization
+To learn more about why we built this library, check out a talk from the Full Stack Talks meetup from July 2016:
 
-## How we build it
+<p><a href="http://www.youtube.com/watch?feature=player_embedded&v=yAbNc3wSOB0"><img src="http://img.youtube.com/vi/yAbNc3wSOB0/0.jpg" alt="YouTube: Hastening React SSR with Component Memoization and Templatization " width="240" height="180" border="10"></a></p>
+
+## How we built it
 After peeling through the React codebase we discovered React’s mountComponent function. This is where the HTML markup is generated for a component. We knew that if we could intercept React's instantiateReactComponent module by using a `require()` hook we could avoid the need to fork React and inject our optimization. We keep a Least-Recently-Used (LRU) cache that stores the markup of rendered components (replacing the data-reactid appropriately).  
 
 We also implemented an enhancement that will templatize the cached rendered markup to allow for more dynamic props. Dynamic props are replaced with template delimiters (i.e. ${ prop_name }) during the react component rendering cycle.  The template is them compiled, cached, executed and the markup is handed back to React. For subsequent requests the component's render(..) call is short-circuited with an execution of the cached compiled template. 
