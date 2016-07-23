@@ -14,7 +14,7 @@ We also wanted the ability to memoize any pure component, not just those that im
 ### YouTube: Hastening React SSR with Component Memoization and Templatization
 To learn more about why we built this library, check out a talk from the Full Stack Talks meetup from July 2016:
 
-<p><a href="http://www.youtube.com/watch?feature=player_embedded&v=yAbNc3wSOB0"><img src="http://img.youtube.com/vi/yAbNc3wSOB0/0.jpg" alt="YouTube: Hastening React SSR with Component Memoization and Templatization " width="240" height="180" border="10"></a></p>
+<p><a href="http://www.youtube.com/watch?feature=player_embedded&v=sn-C_DKLKPE"><img src="http://img.youtube.com/vi/sn-C_DKLKPE/0.jpg" alt="YouTube: Hastening React SSR with Component Memoization and Templatization " width="240" height="180" border="10"></a></p>
 
 ## How we built it
 After peeling through the React codebase we discovered React’s mountComponent function. This is where the HTML markup is generated for a component. We knew that if we could intercept React's instantiateReactComponent module by using a `require()` hook we could avoid the need to fork React and inject our optimization. We keep a Least-Recently-Used (LRU) cache that stores the markup of rendered components (replacing the data-reactid appropriately).  
@@ -156,3 +156,9 @@ Here are a set of option that can be passed to the `electrode-react-ssr-optimiza
     - `cmpName`: the component name that this event transpired on, e.g. "Hello World" component.
     - `loadTimeNS`: the load time spent loading/generating a value for a cache miss, in nanoseconds.  This only returns a value when `collectLoadTimeStats` option is enabled.
 - `collectLoadTimeStats`: an _optional_ config indicating enabling the `loadTimeNS` stat to be calculated and returned in the `eventCallback` cache miss events.
+
+## Other Performance Approaches 
+
+It is important to note that there are several other independent projects that are endeavoring to solve the React server-side rendering bottleneck. Projects like [react-dom-stream](https://github.com/aickin/react-dom-stream) and [react-server](https://github.com/redfin/react-server) attempt to deal with the synchronous nature of ReactDOM.renderToString by rendering React pages asynchronously and in separate chunks. Streaming and chunking react rendering helps on the server by preventing synchronous render processing from starving out other concurrent requests. Streaming the initial HTML markup also means that browsers can start painting pages earlier (without having to wait for the entire response). 
+
+These approaches help improve user perceived performance since content can be painted sooner on the screen. But whether rendering is done synchronously or asynchronously, the total CPU time remains the same since the same amount of work still needs to be done. In contrast, component memoization and templatization reduces the total amount of CPU time for subsequent requests that re-render the same components again. These rendering optimizations can be used in conjunction with other performance enhancements like asynchronous rendering.
