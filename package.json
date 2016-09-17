@@ -1,5 +1,5 @@
 {
-  "name": "electrode-react-ssr-optimization",
+  "name": "react-ssr-optimization",
   "version": "0.0.5",
   "description": "React server-side rendering optimization with component memoization and templatization",
   "main": "lib/index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:walmartlabs/electrode-react-ssr-optimization.git"
+    "url": "git@github.com:walmartlabs/react-ssr-optimization.git"
   },
   "keywords": [
     "react",
