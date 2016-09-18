@@ -24,7 +24,7 @@ We also implemented an enhancement that will templatize the cached rendered mark
 ## How you install it
 
 ```
-npm install --save electrode-react-ssr-optimization
+npm install --save react-ssr-optimization
 ```
 
 ## How you use it
@@ -36,7 +36,7 @@ In `index.js` you will have code that looks something like this:
 ```js
 "use strict";
 
-var componentOptimization = require("electrode-react-ssr-optimization");
+var componentOptimization = require("react-ssr-optimization");
 
 var keyGenerator = function (props) {
     return props.id + ":" + props.name;
@@ -102,7 +102,7 @@ This component takes props like product image, name, description, price. If we w
 These attributes are configured in the component caching library, but instead of providing a cacheKey generator function you’d pass in the templateAttrs and cacheAttrs instead. It looks something like this:
 
 ```js
-var componentOptimization = require("electrode-react-ssr-optimization");
+var componentOptimization = require("react-ssr-optimization");
 
 componentOptimization({
     components: {
@@ -136,7 +136,7 @@ For the given component name, the cache key attributes are used to generate a ca
 
 ### How you configure it
 
-Here are a set of option that can be passed to the `electrode-react-ssr-optimization` library:
+Here are a set of option that can be passed to the `react-ssr-optimization` library:
 
 - `components`: A _required_ map of components that will be cached and the corresponding function to generate its cache key.  
     - `key`: a _required_ string name identifying the component.  This can be either the name of the component when it extends `React.Component` or the `displayName` variable.
