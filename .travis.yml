@@ -13,6 +13,7 @@ branches:
 before_install:
   # Upgrade to npm v2
   - npm install -g npm@2
+  - npm install -g eslint-plugin-filenames
 
 script:
   - npm run check
