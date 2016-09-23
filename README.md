@@ -1,3 +1,5 @@
+[![Build Status](https://drone.io/github.com/walmartlabs/react-ssr-optimization/status.png)](https://drone.io/github.com/walmartlabs/react-ssr-optimization/latest)
+
 <h1><img width="85" align="left" src="/images/react-ssr-logo.png">React Server-Side Rendering Optimization Library</h1>
 
 This React Server-side optimization library is a configurable ReactJS extension for memoizing react component markup on the server. It also supports component templatization to further caching of rendered markup with more dynamic data.  This server-side module intercepts React's instantiateReactComponent module by using a `require()` hook and avoids forking React. 
