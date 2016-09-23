@@ -1,9 +1,8 @@
-[![Build Status](https://drone.io/github.com/walmartlabs/react-ssr-optimization/status.png)](https://drone.io/github.com/walmartlabs/react-ssr-optimization/latest)
-
 <h1><img width="85" align="left" src="/images/react-ssr-logo.png">React Server-Side Rendering Optimization Library</h1>
 
 This React Server-side optimization library is a configurable ReactJS extension for memoizing react component markup on the server. It also supports component templatization to further caching of rendered markup with more dynamic data.  This server-side module intercepts React's instantiateReactComponent module by using a `require()` hook and avoids forking React. 
 
+[![Build Status](https://drone.io/github.com/walmartlabs/react-ssr-optimization/status.png)](https://drone.io/github.com/walmartlabs/react-ssr-optimization/latest)
 ## Why we built it
 React is a best-of-breed UI component framework allowing us to build higher level components that can be shared and reused across pages and apps. React's Virtual DOM offers an excellent development experience, freeing us up from having to manage subtle DOM changes. Most importantly, React offers us a great out-of-the-box isomorphic/universal JavaScript solution. React's `renderToString(..)` can fully render the HTML markup of a page to a string on the server. This is especially important for initial page load performance (particularly for mobile users with low bandwidth) and search engine indexing and ranking — both for SEO (search engine optimization) and SEM (search engine marketing).
 
