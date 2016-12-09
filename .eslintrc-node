@@ -4,6 +4,7 @@ extends:
 ecmaFeatures:
   modules: false
 rules:
+  "filenames/filenames": 0
   "func-style":
     - 0
     - declaration

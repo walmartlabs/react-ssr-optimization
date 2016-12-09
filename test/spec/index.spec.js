@@ -311,6 +311,7 @@ describe("react-component-cache", function () {
   });
 
   it("should templatize properly even when prop names overlap with '_'", () => {
+    /*eslint-disable camelcase*/
     clearRequireCache();
 
     let renderCount = 0;
@@ -333,13 +334,14 @@ describe("react-component-cache", function () {
       }
     }
 
-    let props = {foo: {bar: "Hello World X!"}, foo_bar: "Hello World Y!"};
+    const props = {foo: {bar: "Hello World X!"}, foo_bar: "Hello World Y!"};
     // Cache Miss
     expect(ReactDomServer.renderToString(React.createFactory(HelloWorld)(props))).to.contains("Hello World X!");
     expect(renderCount).to.equal(1);
     // Cache Hit
     expect(ReactDomServer.renderToString(React.createFactory(HelloWorld)(props))).to.contains("Hello World Y!");
     expect(renderCount).to.equal(1);
+    /*eslint-enable camelcase*/
   });
 
   it("should should throw error when templateAttr is function or object", () => {

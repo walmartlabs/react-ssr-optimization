@@ -13,6 +13,7 @@ rules:
   "no-unused-expressions": 0 # for `chai.expect`
   "max-len": [2, 150, 2, {ignorePattern: "^\\s*(?:it|describe)\\(.*"}]
   "max-statements": 0
+  "filenames/filenames": 0
   "max-nested-callbacks": 0
   "prefer-arrow-callback": 0
   "func-style":
