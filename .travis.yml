@@ -1,19 +1,7 @@
 language: node_js
 
 node_js:
-  - "0.10"
-
-# Use container-based Travis infrastructure.
-sudo: false
-
-branches:
-  only:
-    - master
-
-before_install:
-  # Upgrade to npm v2
-  - npm install -g npm@2
-  - npm install -g eslint-plugin-filenames
+  - v6
 
 script:
   - npm run check
