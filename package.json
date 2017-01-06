@@ -27,7 +27,6 @@
   "author": "Naga Malepati, Maxime Najim, Seth Benjamin",
   "license": "Apache-2.0",
   "dependencies": {
-    "react": "^0.14.8",
     "lodash": "^4.12.0",
     "lru-cache": "^4.0.1"
   },
@@ -40,6 +39,10 @@
     "intercept-stdout": "^0.1.2",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
-    "react-dom": "^0.14.8"
+    "react": "^15.0.0 || ^0.14.8",
+    "react-dom": "^15.0.0 || ^0.14.8"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0 || ^0.14.8"
   }
 }
