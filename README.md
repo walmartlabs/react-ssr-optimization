@@ -16,9 +16,13 @@ We also wanted the ability to memoize any pure component, not just those that im
 <img width="800" align="center" src="/images/react-renderToString-cpu-profile.png">
 
 ### YouTube: Hastening React SSR with Component Memoization and Templatization
-To learn more about why we built this library, check out a talk from the Full Stack Talks meetup from July 2016:
+To learn more about why we built this library, check out a talk from the Full Stack meetup from July 2016:
 
 <p><a href="http://www.youtube.com/watch?feature=player_embedded&v=sn-C_DKLKPE"><img src="http://img.youtube.com/vi/sn-C_DKLKPE/0.jpg" alt="YouTube: Hastening React SSR with Component Memoization and Templatization " width="240" height="180" border="10"></a></p>
+
+As well as another (lower quality) recording from the San Diego Web Performance meetup from August 2016:
+
+<p><a href="https://youtu.be/yu0MsXPyPI4?t=13m55s"><img src="https://a248.e.akamai.net/secure.meetupstatic.com/photos/event/8/3/3/0/600_453033584.jpeg" alt="YouTube: Hastening React SSR with Component Memoization and Templatization " width="240" height="160" border="10"></a></p>
 
 ## How we built it
 After peeling through the React codebase we discovered React’s mountComponent function. This is where the HTML markup is generated for a component. We knew that if we could intercept React's instantiateReactComponent module by using a `require()` hook we could avoid the need to fork React and inject our optimization. We keep a Least-Recently-Used (LRU) cache that stores the markup of rendered components (replacing the data-reactid appropriately).  
