@@ -1,6 +1,6 @@
 {
   "name": "react-ssr-optimization",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React server-side rendering optimization with component memoization and templatization",
   "main": "lib/index.js",
   "scripts": {
