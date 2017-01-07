@@ -22,7 +22,10 @@ To learn more about why we built this library, check out a talk from the Full St
 
 As well as another (lower quality) recording from the San Diego Web Performance meetup from August 2016:
 
-<p><a href="https://youtu.be/yu0MsXPyPI4?t=13m55s"><img src="https://a248.e.akamai.net/secure.meetupstatic.com/photos/event/7/a/1/0/600_453031248.jpeg" alt="YouTube: Hastening React SSR with Component Memoization and Templatization " width="240" height="160" border="10"></a></p>
+<p><a href="https://youtu.be/yu0MsXPyPI4?t=13m55s"><img src="https://a248.e.akamai.net/secure.meetupstatic.com/photos/event/7/a/1/0/600_453031248.jpeg" alt="YouTube: Hastening React SSR with Component Memoization and Templatization " width="240" height="160" border="10"></a></p> 
+
+Slide Deck: [Hastening React SSR with component memoization and templatization](https://speakerdeck.com/maxnajim/hastening-react-ssr-with-component-memoization-and-templatization)
+ 
 
 ## How we built it
 After peeling through the React codebase we discovered React’s mountComponent function. This is where the HTML markup is generated for a component. We knew that if we could intercept React's instantiateReactComponent module by using a `require()` hook we could avoid the need to fork React and inject our optimization. We keep a Least-Recently-Used (LRU) cache that stores the markup of rendered components (replacing the data-reactid appropriately).  
