@@ -344,7 +344,7 @@ describe("react-component-cache", function () {
     /*eslint-enable camelcase*/
   });
 
-  it("should should throw error when templateAttr is function or object", () => {
+  it("should accept object attributes for templating", () => {
     clearRequireCache();
 
     let renderCount = 0;
@@ -352,7 +352,7 @@ describe("react-component-cache", function () {
     reactComponentCache({
       components: {
         "HelloWorld": {
-          templateAttrs: ["text"]
+          templateAttrs: ["data"]
         }
       }
     });
@@ -362,16 +362,57 @@ describe("react-component-cache", function () {
     class HelloWorld extends React.Component {
       render() {
         renderCount++;
-        return React.DOM.div(null, this.props.text);
+        return React.DOM.div(null, this.props.data.text);
       }
     }
-    const renderFn = () => {
-      ReactDomServer.renderToString(React.createFactory(HelloWorld)({text: {a: "Hello World X!"}}));
-    };
-    expect(renderFn).to.throw(
-      /Cannot templatize Object at text for component HelloWorld/);
 
-    expect(renderCount).to.equal(0);
+    // Cache Miss
+    let props = {data: { text: "Hello World X!"}};
+    expect(ReactDomServer.renderToString(React.createFactory(HelloWorld)(props))).to.contains("Hello World X!");
+    expect(props.data.text).to.equal("Hello World X!");
+    expect(renderCount).to.equal(1);
+
+    // Cache Hit
+    props = {data: { text: "Hello World Y!"}};
+    expect(ReactDomServer.renderToString(React.createFactory(HelloWorld)(props))).to.contains("Hello World Y!");
+    expect(props.data.text).to.equal("Hello World Y!");
+    expect(renderCount).to.equal(1);
+  });
+
+  it("should accept array ref for templating", () => {
+    clearRequireCache();
+
+    let renderCount = 0;
+    /* eslint-disable max-params, no-console*/
+    reactComponentCache({
+      components: {
+        "HelloWorld": {
+          templateAttrs: ["data"]
+        }
+      }
+    });
+    /* eslint-enable max-params, no-console*/
+    const React = require("react");
+    const ReactDomServer = require("react-dom/server");
+    class HelloWorld extends React.Component {
+      render() {
+        renderCount++;
+        const str = `${this.props.data[0]} ${this.props.data[1]}`;
+        return React.DOM.div(null, str);
+      }
+    }
+
+    // Cache Miss
+    let props = {data: ["Hello World", "X!"]};
+    expect(ReactDomServer.renderToString(React.createFactory(HelloWorld)(props))).to.contains("Hello World X!");
+    expect(props.data.length).to.equal(2);
+    expect(renderCount).to.equal(1);
+
+    // Cache Hit
+    props = {data: ["Hello World", "Y!"]};
+    expect(ReactDomServer.renderToString(React.createFactory(HelloWorld)(props))).to.contains("Hello World Y!");
+    expect(props.data.length).to.equal(2);
+    expect(renderCount).to.equal(1);
   });
 
   it("should accept a custom cache implementation", () => {
